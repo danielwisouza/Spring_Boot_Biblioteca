@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.frases.entity.Livro;
-import br.gov.sp.fatec.frases.repository.LivroRepository;
+import br.gov.sp.fatec.frases.entity.Autor;
+import br.gov.sp.fatec.frases.repository.AutorRepository;
 
 @Transactional
 @Rollback
@@ -17,20 +17,19 @@ import br.gov.sp.fatec.frases.repository.LivroRepository;
 class FrasesApplicationTests {
 
 	@Autowired
-	private LivroRepository lRepository;
+	private AutorRepository AutorRepo;
 
 	@Test
 	void contextLoads() {
 	}
 
 	@Test
-	void findbyTituloTests() {
-		Livro livro= new Livro();
-		livro.setTitulo("Harry Potter e A Pedra Filosofal");
-		livro.setIsbn((long) 1);
-		livro.setPapel("Brochura");
-
-		assertNotNull(lRepository.findByTitulo("Harry Potter e A Pedra Filosofal"));
+	void findByNomeTests() {
+		Autor autor =  new Autor();
+		autor.setNome("J. K. Rowling");
+		autor.setMensagem("Aventura; ‎Fantasia");
+		autor.setBiografia("Joanne Rowling");
+		assertNotNull(AutorRepo.findByNome("J. K. Rowling"));
 	}
 
 /*
