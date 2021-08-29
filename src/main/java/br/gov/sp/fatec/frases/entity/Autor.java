@@ -49,10 +49,9 @@ public class Autor {
         this.biografia = biografia;
     }
 
-    public String gettMensagem() {
+    public String getMensagem() {
         return mensagem;
     }
-    
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
