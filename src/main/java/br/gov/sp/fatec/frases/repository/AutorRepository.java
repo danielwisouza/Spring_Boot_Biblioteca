@@ -9,7 +9,7 @@ import br.gov.sp.fatec.frases.entity.Autor;
 public interface AutorRepository extends JpaRepository<Autor, Long>{
     public Autor findByNome(String nome);
  
-    public List<Autor> findByNomeContainsOrMensagem(String nome, String mensagem);   
+    public List<Autor> findByNomeContainsOrMensagemContains(String nome, String mensagem);   
 }
 
 
