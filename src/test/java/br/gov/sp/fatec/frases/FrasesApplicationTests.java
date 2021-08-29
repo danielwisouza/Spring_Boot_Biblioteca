@@ -8,21 +8,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.frases.entity.Autor;
-import br.gov.sp.fatec.frases.repository.AutorRepository;
+/*import br.gov.sp.fatec.frases.entity.Autor;
+import br.gov.sp.fatec.frases.repository.AutorRepository;*/
 
 @Transactional
 @Rollback
 @SpringBootTest
 class FrasesApplicationTests {
 
-	@Autowired
-	private AutorRepository AutorRepo;
+/*	@Autowired
+	private AutorRepository AutorRepo;/*
 
 	@Test
 	void contextLoads() {
 	}
-
+/*
 	@Test
 	void findByNomeTests() {
 		Autor autor =  new Autor();
@@ -31,7 +31,7 @@ class FrasesApplicationTests {
 		autor.setBiografia("Joanne Rowling");
 		assertNotNull(AutorRepo.findByNome("J. K. Rowling"));
 	}
-
+*/
 /*
 	@Test
 	void findByTituloContainsOrPapelContainsTest() {
