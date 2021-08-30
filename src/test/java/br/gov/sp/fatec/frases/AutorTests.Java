@@ -1,5 +1,6 @@
-package br.gov.sp.fatec.frases;
+/*package br.gov.sp.fatec.frases;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
@@ -32,17 +33,16 @@ class FrasesApplicationTests {
 		AutorRepo.save(autor);
 		assertNotNull(AutorRepo.findByNome("J. K. Rowling"));
 	}
-
-
-	/*
+	
 
 	@Test
-	void findByTituloContainsOrPapelContainsTest() {
-		Livro livro= new Livro();
-		livro.setTitulo("Harry Potter e A Pedra Filosofal");
-		livro.setIsbn((long) 1);
-		livro.setPapel("Brochura");
-
-		assertFalse(livroRepo.findByTituloContainsOrPapelContains("arry", "lalala").isEmpty());
-	}*/
+	void findByNomeContainsOrMensagemContainsTest() {
+		Autor autor =  new Autor();
+		autor.setNome("J. K. Rowling");
+		autor.setMensagem("Aventura; ‎Fantasia");
+		autor.setBiografia("Joanne Rowling");
+		AutorRepo.save(autor);
+		assertFalse(AutorRepo.findByNomeContainsOrMensagemContains("Rowling", "lalala").isEmpty());
+	}
 }
+*/
