@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.frases.entity;
+package br.gov.sp.fatec.biblioteca.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
