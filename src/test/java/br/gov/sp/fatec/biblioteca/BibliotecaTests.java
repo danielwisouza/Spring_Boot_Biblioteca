@@ -17,7 +17,7 @@ import br.gov.sp.fatec.biblioteca.repository.LivroRepository;
 @Transactional
 @Rollback
 @SpringBootTest
-public class LivroTests {
+public class BibliotecaTests {
 
     @Autowired
 	private LivroRepository LivroRepo;
@@ -37,6 +37,16 @@ public class LivroTests {
 		livro.setPapel("Brochura");
         LivroRepo.save(livro);
 		assertNotNull(LivroRepo.findByTitulo("Harry Potter e A Pedra Filosofal"));
+	}
+
+	@Test
+	void findByTituloIgnoreCaseTests() {
+		Livro livro= new Livro();
+		livro.setTitulo("Harry Potter e A Pedra Filosofal");
+		livro.setIsbn((long) 1);
+		livro.setPapel("Brochura");
+        LivroRepo.save(livro);
+		assertNotNull(LivroRepo.findByTituloIgnoreCase("Harry Potter e A Pedra Filosofal"));
 	}
 
 
