@@ -1,10 +1,14 @@
 package br.gov.sp.fatec.biblioteca.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -24,6 +28,19 @@ public class Autor {
 
     @Column(name= "aur_mensagem")
     private String mensagem;
+
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autores")
+    private Set<Livro> livros;
+
+
+    public Set<Livro> getLivros() {
+        return livros;
+    }
+
+    public void setLivros(Set<Livro> livros) {
+        this.livros = livros;
+    }
 
     public long getId() {
         return id;

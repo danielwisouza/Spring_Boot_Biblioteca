@@ -3,6 +3,8 @@ package br.gov.sp.fatec.biblioteca;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -60,25 +62,40 @@ public class BibliotecaTests {
 		assertFalse(LivroRepo.findByTituloContainsOrPapelContains("arry", "lalala").isEmpty());
 	}
 
-
-    @Test
-	void findByNomeTests() {
+	@Test
+	void findByAutoresNomeTests() {
 		Autor autor =  new Autor();
 		autor.setNome("J. K. Rowling");
 		autor.setMensagem("Aventura; ‎Fantasia");
 		autor.setBiografia("Joanne Rowling");
 		AutorRepo.save(autor);
-		assertNotNull(AutorRepo.findByNome("J. K. Rowling"));
+
+		Livro livro= new Livro();
+		livro.setTitulo("Harry Potter e A Pedra Filosofal");
+		livro.setIsbn((long) 1);
+		livro.setPapel("Brochura");
+		livro.setAutores(new HashSet<Autor>());
+		livro.getAutores().add(autor);
+        LivroRepo.save(livro);
+		assertNotNull(LivroRepo.findByAutoresNome("J. K. Rowling").isEmpty());
 	}
-	
 
 	@Test
-	void findByNomeContainsOrMensagemContainsTest() {
+	void findByLivrosTituloTests() {
 		Autor autor =  new Autor();
 		autor.setNome("J. K. Rowling");
 		autor.setMensagem("Aventura; ‎Fantasia");
 		autor.setBiografia("Joanne Rowling");
 		AutorRepo.save(autor);
-		assertFalse(AutorRepo.findByNomeContainsOrMensagemContains("Rowling", "lalala").isEmpty());
+
+		Livro livro= new Livro();
+		livro.setTitulo("Harry Potter e A Pedra Filosofal");
+		livro.setIsbn((long) 1);
+		livro.setPapel("Brochura");
+		livro.setAutores(new HashSet<Autor>());
+		livro.getAutores().add(autor);
+        LivroRepo.save(livro);
+		assertNotNull(AutorRepo.findByLivrosTitulo("Harry Potter e A Pedra Filosofal").isEmpty());
 	}
+
 }
