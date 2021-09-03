@@ -1,4 +1,3 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/mineda/atividade1)
 # Projeto Exemplo com Spring Boot
 
 ### Pré-requisitos
@@ -10,7 +9,7 @@ Caso contrario, o projeto esta configurado para rodar no Gitpod.
 ### Instalação
 #### 1 - Clone o projeto para uma máquina local
 ```
-git clone 
+git clone https://github.com/danielwisouza/Spring_Boot_Biblioteca.git
 ```
 #### 2 - Instale as dependências do projeto
 ```
