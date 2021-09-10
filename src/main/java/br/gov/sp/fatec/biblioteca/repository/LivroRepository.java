@@ -16,4 +16,6 @@ public interface LivroRepository extends JpaRepository<Livro, Long>{
 
    public List<Livro> findByAutoresNome(String nome);
 
+   public List<Livro> findByVolumesSituacao(String situacao);
+
 }

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +39,11 @@ public class Livro {
         inverseJoinColumns = { @JoinColumn(name = "aur_id")})
         
     private Set<Autor> autores;
+
+
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "livro")
+    private Set<Volume> volumes;
     
 
     public Set<Autor> getAutores() {

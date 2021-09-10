@@ -3,6 +3,7 @@ package br.gov.sp.fatec.biblioteca;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Date;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.biblioteca.entity.Autor;
 import br.gov.sp.fatec.biblioteca.entity.Livro;
+import br.gov.sp.fatec.biblioteca.entity.Volume;
 import br.gov.sp.fatec.biblioteca.repository.AutorRepository;
 import br.gov.sp.fatec.biblioteca.repository.LivroRepository;
+import br.gov.sp.fatec.biblioteca.repository.VolumeRepository;
 
 @Transactional
 @Rollback
@@ -26,6 +29,9 @@ public class BibliotecaTests {
 
     @Autowired
 	private AutorRepository AutorRepo;
+
+	@Autowired
+	private VolumeRepository VolumeRepo;
 
 	@Test
 	void contextLoads() {
@@ -97,5 +103,43 @@ public class BibliotecaTests {
         LivroRepo.save(livro);
 		assertNotNull(AutorRepo.findByLivrosTitulo("Harry Potter e A Pedra Filosofal").isEmpty());
 	}
+
+	@Test
+	void findByLivroTituloTest(){
+		Livro livro= new Livro();
+		livro.setTitulo("Harry Potter e A Pedra Filosofal");
+		livro.setIsbn((long) 1);
+		livro.setPapel("Brochura");
+        LivroRepo.save(livro);
+
+
+		Volume volume = new Volume();
+		volume.setAquisicao(new Date());
+		volume.setObservacao("observacao");
+		volume.setSituacao("Aprovado");
+		volume.setLivro(livro);
+		VolumeRepo.save(volume);
+		assertNotNull(VolumeRepo.findByLivroTitulo("Harry Potter e A Pedra Filosofal").isEmpty());
+	}
+
+
+	@Test
+	void findByVolumeSituacaoTest(){
+		Livro livro= new Livro();
+		livro.setTitulo("Harry Potter e A Pedra Filosofal");
+		livro.setIsbn((long) 1);
+		livro.setPapel("Brochura");
+        LivroRepo.save(livro);
+
+
+		Volume volume = new Volume();
+		volume.setAquisicao(new Date());
+		volume.setObservacao("observacao");
+		volume.setSituacao("Aprovado");
+		volume.setLivro(livro);
+		VolumeRepo.save(volume);
+		assertNotNull(LivroRepo.findByVolumesSituacao("Aprovado").isEmpty());
+	}
+
 
 }
