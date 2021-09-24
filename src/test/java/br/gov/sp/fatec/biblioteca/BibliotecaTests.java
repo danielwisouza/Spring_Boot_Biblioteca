@@ -18,6 +18,7 @@ import br.gov.sp.fatec.biblioteca.entity.Volume;
 import br.gov.sp.fatec.biblioteca.repository.AutorRepository;
 import br.gov.sp.fatec.biblioteca.repository.LivroRepository;
 import br.gov.sp.fatec.biblioteca.repository.VolumeRepository;
+import br.gov.sp.fatec.biblioteca.service.SegurancaService;
 
 @Transactional
 @Rollback
@@ -32,6 +33,9 @@ public class BibliotecaTests {
 
 	@Autowired
 	private VolumeRepository VolumeRepo;
+
+	@Autowired
+	private SegurancaService SegurancaRepo;
 
 	@Test
 	void contextLoads() {
@@ -139,6 +143,16 @@ public class BibliotecaTests {
 		volume.setLivro(livro);
 		VolumeRepo.save(volume);
 		assertNotNull(LivroRepo.findByVolumesSituacao("Aprovado").isEmpty());
+	}
+
+
+
+	@Test
+	void novoLivroTest(){
+		SegurancaRepo.novoLivro("The Chronicles of Narnia", (long) 11, "Folhas de Mandrágora", "C. S. Lewis");
+
+		assertNotNull(LivroRepo.findByAutoresNome("C. S. Lewis"));
+		assertNotNull(LivroRepo.findByTitulo("The Chronicles of Narnia"));
 	}
 
 
