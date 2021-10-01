@@ -14,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="liv_livro")
 public class Livro {
@@ -32,7 +34,7 @@ public class Livro {
     @Column(name= "liv_tipo_papel")
     private String papel;
 
-
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "lau_livro_autor",
         joinColumns = { @JoinColumn(name="liv_id")},
