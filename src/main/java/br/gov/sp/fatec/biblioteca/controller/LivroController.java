@@ -2,6 +2,8 @@ package br.gov.sp.fatec.biblioteca.controller;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +24,13 @@ public class LivroController {
     private SegurancaService segurancaService;
     
     @GetMapping
+    @JsonView(ViewLivro.LivroSimplificado.class)
     public List<Livro> buscarTodosLivros(){
         return segurancaService.buscarTodosLivros();
     }
 
     @PostMapping
+    @JsonView(ViewLivro.LivroCompleto.class)
     public Livro novoLivro(@RequestBody Livro livro){
         return segurancaService.novoLivro(livro.getTitulo(), livro.getIsbn(), livro.getPapel(), "AUTOR_LIVRO");
     }
