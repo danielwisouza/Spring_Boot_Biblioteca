@@ -12,6 +12,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.biblioteca.controller.ViewLivro;
 
 
 @Entity
@@ -20,9 +23,11 @@ public class Autor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "aur_id")
+    @JsonView(ViewLivro.LivroCompleto.class)
     private long id;
 
     @Column(name= "aur_nome")
+    @JsonView(ViewLivro.LivroSimplificado.class)
     private String  nome;
 
     @Column(name= "aur_bio")
