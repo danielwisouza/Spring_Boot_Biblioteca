@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import br.gov.sp.fatec.biblioteca.controller.ViewLivro;
+import br.gov.sp.fatec.biblioteca.controller.View;
 
 @Entity
 @Table(name="liv_livro")
@@ -25,20 +25,20 @@ public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "liv_id")
-    @JsonView(ViewLivro.LivroCompleto.class)
+    @JsonView(View.LivroCompleto.class)
     private long id;
 
     @Column(name= "liv_titulo")
-    @JsonView(ViewLivro.LivroSimplificado.class)
+    @JsonView(View.LivroSimplificado.class)
      /*@JsonView({View.LivroSimplificado.class, View.LivroCompleto.class}) Sem usar extends*/
     private String  titulo;
 
     @Column(name= "liv_isbn")
-    @JsonView(ViewLivro.LivroCompleto.class)
+    @JsonView(View.LivroCompleto.class)
     private Long isbn;
 
     @Column(name= "liv_tipo_papel")
-    @JsonView(ViewLivro.LivroSimplificado.class)
+    @JsonView(View.LivroSimplificado.class)
     private String papel;
 
   
@@ -46,7 +46,7 @@ public class Livro {
     @JoinTable(name = "lau_livro_autor",
         joinColumns = { @JoinColumn(name="liv_id")},
         inverseJoinColumns = { @JoinColumn(name = "aur_id")})
-    @JsonView(ViewLivro.LivroSimplificado.class)
+    @JsonView(View.LivroSimplificado.class)
     private Set<Autor> autores;
 
 

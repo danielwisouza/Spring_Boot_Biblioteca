@@ -12,28 +12,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gov.sp.fatec.biblioteca.entity.Livro;
+import br.gov.sp.fatec.biblioteca.entity.Usuario;
 import br.gov.sp.fatec.biblioteca.service.SegurancaService;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/livro")
-public class LivroController {
+@RequestMapping(value = "/usuario")
+public class UsuarioController {
 
     @Autowired
     private SegurancaService segurancaService;
-    
+
     @GetMapping
-    @JsonView(View.LivroSimplificado.class)
-    public List<Livro> buscarTodosLivros(){
-        return segurancaService.buscarTodosLivros();
+    @JsonView(View.UsuarioSimplificado.class)
+    public List<Usuario> buscarTodosUsuarios() {
+        return segurancaService.buscarTodosUsuarios();
     }
 
     @PostMapping
-    @JsonView(View.LivroCompleto.class)
-    public Livro novoLivro(@RequestBody Livro livro){
-        return segurancaService.novoLivro(livro.getTitulo(), livro.getIsbn(), livro.getPapel(), "AUTOR_LIVRO");
+    @JsonView(View.UsuarioCompleto.class)
+    public Usuario novoUsuario(@RequestBody Usuario usuario) {
+        return segurancaService.novoUsuario(usuario.getNome(), usuario.getEmail(), usuario.getSenha(), "ROLE_USUARIO");
     }
-
-
+    
 }
