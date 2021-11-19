@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,9 @@ import br.gov.sp.fatec.biblioteca.repository.UsuarioRepository;
 public class SegurancaServiceImpl implements SegurancaService{
     
     @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
     LivroRepository livroRepo;
 
     @Autowired
@@ -36,6 +41,7 @@ public class SegurancaServiceImpl implements SegurancaService{
     AutorizacaoRepository autorizacaoRepo;
 
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public Livro novoLivro(String  titulo,Long isbn, String papel, String autor){
         Autor aut = autorRepo.findByNome(autor);
         if(aut ==null){
@@ -54,12 +60,13 @@ public class SegurancaServiceImpl implements SegurancaService{
 
         return livro;
     }
-
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     public List<Livro> buscarTodosLivros(){
        return livroRepo.findAll();
 
     }
-   @Override
+    @Override
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     public Usuario novoUsuario(String nome, String email, String senha, String autorizacao) {
         
@@ -73,7 +80,7 @@ public class SegurancaServiceImpl implements SegurancaService{
         Usuario usuario = new Usuario();
         usuario.setNome(nome);
         usuario.setEmail(email);
-        usuario.setSenha(senha);
+        usuario.setSenha(passwordEncoder.encode(senha));
         usuario.setAutorizacoes(new HashSet<Autorizacao>());
         usuario.getAutorizacoes().add(aut);
         usuarioRepo.save(usuario);
@@ -82,6 +89,7 @@ public class SegurancaServiceImpl implements SegurancaService{
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('ADMIN','USUARIO')")
     public List<Usuario> buscarTodosUsuarios() {
         return usuarioRepo.findAll();
     }
